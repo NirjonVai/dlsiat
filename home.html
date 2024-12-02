@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cph.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Tournament</title>
+    <style>
+       * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #2980b9;
+        }
+
+        header {
+            background: #2980b9;
+            color: white;
+            display: flex;
+            align-items: center;
+            height: 50px;
+            border-bottom: 1px solid #fff;
+            justify-content: space-between;
+            padding: 0 25px;
+        }
+
+        .toggle-icon {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        h1 {
+            margin: 0;
+            flex: 1;
+            text-align: center;
+            font-size: 22px;
+        }
+
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            background: #2980b9;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            left: -250px;
+            transition: left 0.3s ease;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 5px;
+            z-index: 10;
+        }
+
+        .sidebar.open {
+            left: 0;
+            display: block;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 135px;
+        }
+
+        li {
+            margin: 10px 0;
+            padding: 10px;
+            width: 80%;
+            color: #fff;
+            border-radius: 5px;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .sidebar li i {
+            color: #ffffff;
+            margin-right: 15px;
+            font-size: 20px;
+        }
+
+        .sidebar li:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .bell-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-left: auto;
+        }
+
+        .fa-bell {
+            font-size: 24px;
+            margin-left: 10px;
+            color: #fff;
+        }
+
+        .bell-text {
+            position: absolute;
+            background-color: #dc0707;
+            padding: 0.8px 3px;
+            border-radius: 50%;
+            margin-left: 23px;
+            margin-top: -18px;
+            font-size: 8px;
+            font-weight: bold;
+        }
+
+        /* User Section Styling */
+        .user-section {
+            width: 80%;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: white;
+            font-weight: bold;
+            background-color: #2980b9;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Marquee Container Styling */
+        .marquee-container {
+            background-color: #f8f9fa;  /* Light background color */
+            display: flex;               /* Use flexbox to align items horizontally */
+            align-items: center;         /* Vertically center the content */
+            font-size: 16px;             /* Set the font size for the text */
+            color: #007bff;              /* Text color */
+            border-radius: 5px;          /* Rounded corners */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            margin: 20px 0;              /* Add space around the marquee container */
+        }
+
+        /* Marquee Element Styling */
+        marquee {
+            font-weight: bold;           /* Make the text bold */
+            font-size: 18px;             /* Larger text size for visibility */
+            color: #dc3545;              /* Set a different color for the marquee text */
+            flex-grow: 1;                /* Allow the text to take up the remaining space */
+        }
+
+        /* Icon Styling */
+        .marquee-container i {
+            margin-left: 0px;          /* Space between the icon and the text */
+            font-size: 24px;             /* Size of the icon */
+            color: #fff;              /* Set the icon color */
+            background: #007bff;
+            padding: 6px 5px; 
+            border-radius: 5px 0px 0px 5px; 
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Main Container Styling */
+        .main-container {
+            width: 95%;
+            margin: auto;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            header {
+                padding: 0 10px;
+            }
+
+            .sidebar {
+                width: 250px;
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            h1 {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .sidebar li {
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 16px;
+            }
+
+            .toggle-icon {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <button id="toggleButton" aria-label="Toggle navigation" class="toggle-icon">
+            <i class="fa-solid fa-bars" id="icon"></i>
+        </button>
+        <h1 class="aurora">DLSIAT TOURNAMENT</h1>
+        <div class="bell-container" id="bellContainer">
+            <i class="fa-solid fa-bell" id="bellIcon"></i>
+            <span class="bell-text">1</span>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <ul>
+            <div class="user-section">
+                <div id="username-display">Not Login</div>
+            </div>
+            <li id="homeLink"><i class="fa-solid fa-tachometer-alt"></i> Home</li>
+            <li onclick="goToProfile()"><i class="fa-solid fa-circle-user"></i> Profile</li>
+            <li onclick="window.location.href='playercard.html'"><i class="fa-solid fa-id-card"></i> Player Card</li>
+            <li onclick="window.location.href='playerform.html'"><i class="fa-solid fa-registered"></i> Player Form</li>
+            <li onclick="goToHistory()"><i class="fa-solid fa-circle-up"></i> Withdrawal</li>
+            <li onclick="goToHistory()"><i class="fas fa-history"></i> History</li>
+            
+            <li><i class="fab fa-facebook"></i> Social Media
+            </li>
+            
+            <li><i class="fas fa-question-circle"></i> Help Center</li>
+            <li><i class="fas fa-shield-alt"></i> Privacy Policy</li>
+            <li><i class="fas fa-info-circle"></i> About Us</li>
+            <li><i class="fas fa-star"></i> Rate Us</li>
+            <li onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Log Out</li>
+        </ul>
+    </div>
+
+    <!-- Main Container -->
+    <main id="main-container" class="main-container">
+        <!-- Marquee Notice -->
+        <div class="marquee-container">
+            <i class="fas fa-volume-up"></i>
+            <marquee behavior="scroll" direction="left" scrollamount="4">
+                🚨 Important Notice: The tournament registration deadline is approaching! Make sure to complete your registration soon. 🚨
+            </marquee>
+        </div>
+
+        <div class="image-container">
+            <img src="img/banner.png" alt="image">
+        </div>
+    </main>
+
+    <script>
+        let username = localStorage.getItem("username");
+
+        // Initialize user data
+        function initializeUserData() {
+            if (username) {
+                // Placeholder for any additional user data initialization
+            }
+        }
+
+        // Initialize setup
+        window.onload = function() {
+            initializeUserData();
+
+            // Display username if logged in
+            if (username) {
+                document.getElementById("username-display").textContent = username;
+            }
+        };
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem("username");
+            // Earnings are retained
+            window.location.href = 'login-signup.html?form=login'; // Redirect to login page
+        }
+
+        // Navigation functions
+        function goToProfile() {
+            window.location.href = 'profile.html';
+        }
+
+        function goToHistory() {
+            window.location.href = 'cph-history.html';
+        }
+
+        // Toggle sidebar visibility
+        const sidebar = document.getElementById('sidebar');
+        const toggleButton = document.getElementById('toggleButton');
+        const mainContent = document.querySelector('main');
+        const icon = document.getElementById('icon');
+
+        toggleButton.addEventListener('click', function() {
+            sidebar.classList.toggle('open');
+            mainContent.classList.toggle('shrink');
+
+            // Toggle the icon between bars and X
+            if (sidebar.classList.contains('open')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+    </script>
+</body>
+</html>

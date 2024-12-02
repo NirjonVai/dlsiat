@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login-signup.css">
+    <title>Login and Signup Form</title>
+    <style>
+      * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('img/bgphoto.jpg');
+    background-position: center;
+    background-repeat: repeat; /* Ensures the background image repeats */
+}
+
+h3 {
+    color: #fff;
+    text-align: center;
+    margin-top: 20%;
+}
+
+/* Main container for forms */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+    margin-top: 10%;
+    background: #000000b8;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 20px;
+}
+
+/* Hide all forms by default */
+.form {
+    display: none;
+}
+
+.form.active {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    transition: all 0.4s ease-in-out;
+}
+
+button {
+    width: 100%;
+    padding: 11px;
+    background: #2980b9;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.switch-form {
+    text-align: center;
+    margin-top: 15px;
+    color: #fff;
+}
+
+.switch-form a {
+    color: #2980b9;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    transition: border-color 0.3s ease-in-out;
+    outline: none;
+}
+
+.input-group input:focus {
+    border-color: #2980b9;
+}
+
+.info-text {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+}
+
+.info-text p {
+    margin-bottom: 10px;
+}
+
+.info-text a {
+    color: gold;
+    text-decoration: none;
+}
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+    h3 {
+        margin-top: 10%;
+        font-size: 20px;
+    }
+
+    .form-container {
+        padding: 15px;
+        margin-top: 15%;
+    }
+
+    .input-group input {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .info-text {
+        font-size: 12px;
+    }
+}
+
+/* Tablet Styles */
+@media (max-width: 768px) {
+    h3 {
+        margin-top: 15%;
+    }
+
+    .form-container {
+        padding: 15px;
+        margin-top: 10%;
+    }
+
+    .input-group input {
+        font-size: 15px;
+        padding: 9px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    button {
+        font-size: 15px;
+        padding: 10px;
+    }
+
+    .info-text {
+        font-size: 13px;
+    }
+}
+
+/* Desktop Styles */
+@media (min-width: 1024px) {
+    .form-container {
+        margin-top: 10%;
+    }
+
+    h3 {
+        font-size: 30px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .input-group input {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 11px;
+    }
+
+    .info-text {
+        font-size: 14px;
+    }
+}
+
+    </style>
+</head>
+<body>
+  <h3>DLSIAT টুর্নামেন্টে আপনাকে স্বাগতম</h3>
+    <div class="form-container">
+            <form id="login-form" class="form active">
+                <h2>Login Form</h2>
+                <div class="input-group">
+                    <label for="login-phone">Phone Number</label>
+                    <input type="tel" placeholder="Phone Number" required id="login-phone">
+                </div>
+                <div class="input-group">
+                    <label for="login-password">Login Password</label>
+                    <input type="password" placeholder="Login Password" required id="login-password">
+                </div>
+                
+                    <button type="submit">Login</button>
+               
+                <p class="switch-form">Already have an account? <a href="#" id="signup-btn">Login</a></p>
+            </form>
+            <form id="signup-form" class="form hidden">
+                <h2>Signup Form</h2>
+                <div class="input-group">
+                    <label for="signup-username">Username</label>
+                    <input type="text" placeholder="Username" required id="signup-username">
+                </div>
+                <div class="input-group">
+                    <label for="signup-phone">Phone Number</label>
+                    <input type="tel" placeholder="Phone Number" required id="signup-phone">
+                </div>
+                <div class="input-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" placeholder="Create a password" required id="signup-password">
+                </div>
+                    <button type="submit">Signup</button>
+                <p class="switch-form">Don't have an account? <a href="#" id="login-btn">Sign Up</a></p>
+            </form>
+        </div>
+        
+        <div class="info-text">
+        <p>By using our service, you agree to our <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a>.</p>
+        <p>If you need assistance, please contact our support team at <a href="mailto:support@example.com">support@example.com</a>.</p>
+    </div>
+        
+    <script>
+      // Handle signup form submission
+document.getElementById('signup-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const username = document.getElementById('signup-username').value.trim();
+    const phone = document.getElementById('signup-phone').value.trim();
+    const password = document.getElementById('signup-password').value;
+
+    // Validate inputs
+    if (!username || !phone || !password) {
+        alert('All fields are required.');
+        return;
+    }
+
+    // Format join date
+    const joinDate = new Date().toLocaleString('en-BD', {
+        timeZone: 'Asia/Dhaka',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true
+    }).replace(',', ''); // Format: 08/10/2024, 5:29:08 PM
+
+    // Create user object
+    const user = {
+        username: username,
+        phone: phone,
+        password: password,
+        joinDate: joinDate // Store join date
+    };
+
+    // Store user data in local storage
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    
+    // Check for existing user with the same phone number or username
+    if (users.find(u => u.phone === phone)) {
+        alert('User with this phone number already exists.');
+        return;
+    }
+    if (users.find(u => u.username === username)) {
+        alert('Username already exists.');
+        return;
+    }
+
+    // Add new user to the users array and save to local storage
+    users.push(user);
+    localStorage.setItem('users', JSON.stringify(users));
+
+    // Initialize earnings and submission count for the new user
+    localStorage.setItem(`${username}_earnings`, '0.00');
+    localStorage.setItem(`${username}_submissionCount`, '0');
+    localStorage.setItem(`${username}_joinDate`, joinDate); // Store join date
+
+    // Show success message and redirect to login page
+    alert('Signup successful! You can now log in.');
+    window.location.href = 'login-signup.html';
+});
+
+// Toggle between login and signup forms
+document.getElementById('login-btn').addEventListener('click', function() {
+    document.getElementById('login-form').classList.add('active');
+    document.getElementById('signup-form').classList.remove('active');
+    this.classList.add('active');
+    document.getElementById('signup-btn').classList.remove('active');
+});
+
+document.getElementById('signup-btn').addEventListener('click', function() {
+    document.getElementById('signup-form').classList.add('active');
+    document.getElementById('login-form').classList.remove('active');
+    this.classList.add('active');
+    document.getElementById('login-btn').classList.remove('active');
+});
+
+// Handle login form submission
+document.getElementById('login-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const phone = document.getElementById('login-phone').value.trim();
+    const password = document.getElementById('login-password').value;
+
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    
+    // Check if the user exists
+    const user = users.find(u => u.phone === phone && u.password === password);
+    
+    if (user) {
+        // Store the username in localStorage for further use
+        localStorage.setItem("username", user.username);
+        // Redirect to user data page
+        window.location.href = 'home.html';
+    } else {
+        alert('Invalid phone number or password.');
+    }
+});
+
+// On page load, check if the URL is for the login-signup.html page
+if (window.location.pathname.endsWith('login-signup.html')) {
+    document.getElementById('login-form').classList.add('active');
+    document.getElementById('signup-form').classList.remove('active');
+}
+
+    </script>
+</body>
+</html>

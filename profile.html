@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Data</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+         /* Reset some default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* General page styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+    
+        /* Header */
+        header {
+            width: 100%;
+            background-color: #2980b9;
+            color: white;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Back Button Icon */
+        header .back-btn {
+            margin-right: 20px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 22px;
+            flex-grow: 1;
+            text-align: center;
+            margin-right: 30px;
+        }
+
+        /* Profile Container Styling */
+        .profile-container {
+            background: #2980b9;
+            padding: 10px;
+            border-radius: 8px; /* Slightly rounder corners */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Strong shadow for depth */
+            width: 95%;
+            max-width: 900px;
+            margin: 30px auto;
+            transition: transform 0.3s ease-in-out;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Clean, modern font */
+        }
+
+        .profile-container .profile-header {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #fff; /* Blue color for the header to stand out */
+        }
+
+        /* Profile Image Styling */
+        .profile-image-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px; /* Space below the image */
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%; /* Circular shape */
+            border: 3px solid #ddd; /* Light border around the image */
+            object-fit: cover; /* Ensures the image fits well within the circle */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow around the image */
+            transition: transform 0.2s ease-in-out; /* Smooth transition for the hover effect */
+        }
+
+        .profile-image:hover {
+            transform: scale(1.1); /* Slightly zoom the image on hover */
+        }
+
+        /* Profile Info Styling */
+        .profile-info {
+            text-align: left; /* Align text to the left */
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333; /* Darker text for better contrast */
+            margin-top: 20px;
+        }
+
+        .profile-info .profile-item {
+            margin-bottom: 10px;
+        }
+
+        .profile-info label {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* New Styles for profile-value */
+        .profile-value {
+            background: #f0f0f0; /* Light gray background */
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd; /* Light border around the value */
+        }
+        
+           /* Player-info container */
+          .Matches-stats {
+            width: 100%;
+            margin: auto;
+        }
+
+        .Matches-item {
+            display: flex;
+            justify-content: space-between; /* To spread the items across the container */
+            gap: 20px;
+        }
+
+        /* Styling for each player/item */
+        .Player-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            width: 100%; 
+            height: 48px;
+        }
+
+        .Player-title {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        
+        .Player-value1 {
+            font-size: 16px;
+            color: #ff9f43;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .Player-value2 {
+            font-size: 14px;
+            color: #34495eba;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        /* Separate div for stats */
+        .Player-stats-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px; /* Added margin-top for better spacing */
+        }
+
+        .Player-stats {
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center items horizontally */
+            width: 30%; /* Ensure that each stat div takes up 30% of available width */
+            font-size: 10px;
+            font-weight: bold;
+            color: #555;
+            background-color: #ecf0f1;
+            padding: 5px;
+            border-radius: 5px;
+            text-align: center; /* Ensure text is centered */
+        }
+
+
+        /* New class for stats section */
+        .Player-stats-summary {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .Player-stats-summary .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            width: 30%;
+            text-align: center;
+        }
+
+        .stat-item .stat-title {
+            font-size: 10px;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        
+        .stat-item .stat-value-match {
+            font-size: 15px;
+            color: #EE5A24;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        .stat-item .stat-value-win {
+            font-size: 15px;
+            color: #10ac84;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+        
+        .stat-item .stat-value-loss {
+            font-size: 15px;
+            color: #ff6b6b;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+        
+        .toggle-password {
+            position: relative;
+            left: 80%;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header {
+                padding: 10px;
+            }
+
+            header h1 {
+                font-size: 18px;
+                margin-right: 10px;
+            }
+
+            .profile-container {
+                padding: 20px;
+                width: 90%;
+                max-width: 100%;
+            }
+
+            .profile-image {
+                width: 100px;
+                height: 100px;
+            }
+
+            .profile-info {
+                font-size: 16px;
+            }
+
+            .profile-info .profile-item {
+                margin-bottom: 8px;
+            }
+
+            .profile-info label {
+                font-size: 16px;
+            }
+
+            .profile-value {
+                font-size: 14px;
+            }
+        }
+
+        /* Desktop Responsiveness */
+        @media (min-width: 769px) {
+            .profile-container {
+                width: 80%;
+                max-width: 900px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <i class="fas fa-arrow-left back-btn" onclick="goToHome()"></i>
+        <h1>DLSIAT TOURNAMENT</h1>
+    </header>
+    <div class="main-container">
+        <!-- Profile Page -->
+    <div id="profilePage" class="profile-container">
+      <h3>Total Earnings</h3>
+        <div class="user-info" id="total-earnings"></div>
+        <div class="profile-header">Welcome to your Profile!</div>
+        <div class="profile-image-container">
+            <img src="player.jpg" alt="Profile Picture" class="profile-image" />
+        </div>
+        
+        <!-- Player-info -->
+    <div class="Matches-stats">
+        <div class="Matches-info">
+            <div class="Matches-item">
+                 <div class="Player-item">
+                    <div class="Player-title">Matches Played</div>
+                    <div class="Player-value1">10</div>
+                </div>
+                <div class="Player-item">
+                    <div class="Player-title">Running Club</div>
+                    <div class="Player-value2">Furtune Barishal</div>
+                </div>
+            </div>
+            <!-- Match Stats Section with new class for stats -->
+            <div class="Player-stats-summary">
+                <div class="stat-item">
+                    <div class="stat-title">Total Goal</div>
+                    <div class="stat-value-match">30</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-title">Win</div>
+                    <div class="stat-value-win">6</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-title">Loss</div>
+                    <div class="stat-value-loss">4</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+        <div class="profile-info">
+            <div class="profile-item">
+                <label>User Join Date </label>
+                <div class="profile-value" id="joindate"></div>
+            </div>
+            <div class="profile-item">
+                <label>Username</label>
+                <div class="profile-value" id="username"></div>
+            </div>
+            <div class="profile-item">
+                <label>Phone:</label>
+                <div class="profile-value" id="phone-number"></div>
+            </div>
+            <div class="profile-item">
+                <label>Password:</label>
+                <div class="profile-value" id="password-container"><span id="password-dots">******</span>
+            <span id="password" style="display: none;">N/A</span>
+            <button type="button" class="toggle-password" onclick="togglePassword()">Show</button></div>
+            </div>
+        </div>
+    </div>
+    </div>
+    
+    
+
+    <script>
+        // Retrieve and display user data from local storage
+        window.onload = function() {
+            const username = localStorage.getItem("username") || 'N/A';
+            const totalEarnings = parseFloat(localStorage.getItem(`${username}_earnings`) || '0.00');
+            const joinDate = localStorage.getItem(`${username}_joinDate`) || 'N/A';
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(u => u.username === username);
+
+            // Update the display for total earnings, username, phone number, and password
+            document.getElementById('total-earnings').textContent = `$${totalEarnings.toFixed(2)}`;
+            document.getElementById('username').textContent = username;
+            document.getElementById('phone-number').textContent = user ? user.phone : 'N/A';
+            document.getElementById('joindate').textContent = joinDate; // Display join date
+
+            // Generate asterisks based on the actual password length
+            const password = user ? user.password : 'N/A';
+            document.getElementById('password').textContent = password; // Store actual password
+            document.getElementById('password-dots').textContent = '*'.repeat(password.length); // Display asterisks
+        };
+
+        function goToHome() {
+            window.location.href = 'home.html';
+        }
+
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const passwordDots = document.getElementById('password-dots');
+            const toggleButton = document.querySelector('.toggle-password');
+
+            if (passwordField.style.display === "none") {
+                passwordField.style.display = "inline"; // Show actual password
+                passwordDots.style.display = "none"; // Hide asterisks
+                toggleButton.textContent = "Hide"; // Change button text
+            } else {
+                passwordField.style.display = "none"; // Hide actual password
+                passwordDots.style.display = "inline"; // Show asterisks
+                toggleButton.textContent = "Show"; // Change button text
+            }
+        }
+    </script>
+</body>
+</html>
